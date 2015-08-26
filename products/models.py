@@ -13,3 +13,16 @@ class Product(models.Model):
 
 	def __unicode__(self):
 		return self.title
+
+
+class ProductImage(models.Model):
+	product = models.ForeignKey(Product)
+	image = models.ImageField(upload_to='products/images/')
+	featured = models.BooleanField(default=False)
+	thumbnail = models.BooleanField(default=False)
+	active = models.BooleanField(default=True)
+	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+	def __unicode__(self):
+		return self.product.title
+		
