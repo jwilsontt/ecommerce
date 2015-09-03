@@ -30,16 +30,26 @@ Welcome to
 <div class="row">
 
 	{% for product in products %}
-	<div class="col-sm-3">
-		{{ product.title}}
-		{{ product.price}}
+	<div class="col-sm-4">
 
-		{% for item in product.productimage_set.all %}
 
-		{% if item.featured %}
-		<img src="{{ MEDIA_URL }}{{ item.image }}"/>
-		{% endif %}
-		{% endfor %}
+
+		<div class="thumbnail">
+			{% for item in product.productimage_set.all %}
+
+
+			{% if item.featured %}
+			<img class="img-responsive" src="{{ MEDIA_URL }}{{ item.image }}"/>
+			{% endif %}
+			{% endfor %}
+
+			<div class="caption">
+				<a href="{% url 'single_product' product.slug %}"><h3>{{ product.title }}</h3></a>
+				<p>{{ product.description|truncatewords:15}}</p>
+				<p><a href="{% url 'single_product' product.slug %}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			</div>
+		</div>
+
 	</div>
 
 	{% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
